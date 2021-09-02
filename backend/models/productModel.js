@@ -6,6 +6,8 @@ const ProductSchema = new mongoose.Schema(
   {
     id: {
       type: String,
+      index: true,
+      required: [true, "ID is required"],
     },
 
     title: {
