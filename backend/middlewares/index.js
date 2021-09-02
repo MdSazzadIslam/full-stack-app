@@ -11,6 +11,6 @@ exports.loadMiddlewares = function (app) {
   app.use(cors());
   app.use(helmet());
   app.use(compression());
-  app.use(notFound);
-  app.use(errorHandler);
+  /*   app.use(notFound);
+  app.use(errorHandler); */
 };

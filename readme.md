@@ -46,3 +46,7 @@ npm run data:import
 # Destroy data
 
 npm run data:destroy
+
+# Project Architecture
+
+Client(Web Browser) -> Web Server (Front End App) -> Back-End Server (Back End API) -> MongoDB

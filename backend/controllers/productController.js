@@ -2,84 +2,93 @@
 
 const Product = require("../models/productModel");
 
-const getProducts = (req, res) => {
-  SubTask.find({})
-    .sort({ createdAt: -1 })
-    .exec(function (err, data) {
-      if (err)
-        return res.status(500).json({
-          status: 500,
-          success: false,
-          message: "Error occured while retriving the record" + error.message,
-        });
+const getProducts = async (req, res) => {
+  const perPage = parseInt(req.query.limit) || 10;
+  let page = parseInt(req.query.page) || 1;
 
-      return res.status(200).json(data);
+  try {
+    const products = await Product.find({})
+      .sort("-createdAt")
+      .skip(perPage * page - perPage)
+      .limit(perPage);
+    const count = await Product.count();
+    const pages = Math.ceil(count / perPage);
+    return res.status(200).json({ products, count, currentPage: page, pages });
+  } catch (error) {
+    return res.status(500).json({
+      status: 500,
+      success: false,
+      message: "Error occured while retriving the record" + error.message,
     });
+  }
 };
 
-const getProduct = (req, res) => {
-  SubTask.findById({ id: req.params.id })
-    .sort({ createdAt: -1 })
-    .exec(function (err, data) {
-      if (err)
-        return res.status(500).json({
-          status: 500,
-          success: false,
-          message: "Error occured while retriving the record" + error.message,
-        });
-      return res.status(200).json(data);
+const getProduct = async (req, res) => {
+  try {
+    const product = await Product.findOne({ id: req.params.id });
+    return res.status(200).json(product);
+  } catch (error) {
+    return res.status(500).json({
+      status: 500,
+      success: false,
+      message: "Error occured while retriving the record" + error.message,
     });
+  }
 };
 
-const createProduct = (req, res) => {
-  const product = new Product(req.body);
-
-  product.save(function (err) {
-    if (err)
-      return res.status(500).json({
-        status: 500,
-        success: false,
-        message: "Error occured while saving the record" + error.message,
-      });
-
+const createProduct = async (req, res) => {
+  try {
+    const product = new Product(req.body);
+    await product.save();
     return res.status(200).json({
       status: 201,
       success: true,
       message: "Record saved successfully",
     });
-  });
+  } catch (error) {
+    return res.status(500).json({
+      status: 500,
+      success: false,
+      message: "Error occured while saving the record" + error.message,
+    });
+  }
 };
 
-const updateProduct = (req, res) => {
-  Product.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    { new: true },
-    function (err, data) {
-      if (err)
-        return res.status(500).json({
-          status: 500,
-          success: false,
-          message:
-            `Error occured while updating the record with id ${req.params.id} ` +
-            error.message,
-        });
-
-      if (!data) {
-        return res.status(404).json({
-          status: 404,
-          success: false,
-          message: `Can not update the record with id ${req.params.id}`,
-        });
-      } else {
-        return res.status(202).json({
-          status: 202,
-          success: false,
-          message: "Record updated successfully",
-        });
-      }
+const updateProduct = async (req, res) => {
+  try {
+    const exists = await product.findOne(req.params.id);
+    if (exists === null || exists === undefined) {
+      return res.status(404).json({
+        status: 404,
+        success: false,
+        message: "Record not found",
+      });
     }
-  );
+    const product = await Product.findOneAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (product) {
+      return res.status(202).json({
+        status: 202,
+        success: false,
+        message: "Record updated successfully",
+      });
+    } else {
+      return res.status(500).json({
+        status: 500,
+        success: false,
+        message: `Error occured while updating the record with id ${req.params.id} `,
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      status: 500,
+      success: false,
+      message:
+        `Error occured while updating the record with id ${req.params.id} ` +
+        error.message,
+    });
+  }
 };
 
 module.exports = {

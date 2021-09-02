@@ -1,7 +1,7 @@
 "use strict";
 
-const todoRoute = require("./productRoute");
+const productRoute = require("./productRoute");
 
 exports.loadRoutes = function (app) {
-  app.use("/api/v1/shoparize", todoRoute);
+  app.use("/api/v1/shoparize", productRoute);
 };
