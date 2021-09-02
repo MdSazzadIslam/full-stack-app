@@ -1,6 +1,7 @@
 import "./App.css";
 import Row from "./components/Row";
-function App() {
+
+const App = () => {
   return (
     <div>
       <div className="main-content">
@@ -37,6 +38,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;
