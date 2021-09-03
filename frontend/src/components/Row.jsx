@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
 
+import { NavLink } from "react-bootstrap";
+
 const Row = ({ products }) => {
   const displayProducts = products.map((product) => {
     return (
@@ -10,15 +12,32 @@ const Row = ({ products }) => {
               <a href="####" className="avatar rounded-circle mr-3">
                 <img alt={product.brand} src={product.image_link} />
               </a>
+              <div class="media-body">
+                <span class="mb-0 text-sm">{product.title}</span>
+              </div>
             </div>
           </th>
-          <td>{product.title}</td>
-          <td>{product.description}</td>
-          <td>{product.price}</td>
-          <td>{product.link}</td>
-          <td>{product.availability}</td>
           <td>{product.brand}</td>
           <td>{product.condition}</td>
+          <td>{product.availability}</td>
+          <td>{product.price} </td>
+
+          <td className="text-right">
+            <div className="dropdown">
+              <NavLink
+                className="btn btn-sm btn-icon-only text-light"
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i className="fas fa-ellipsis-v" style={{ color: "blue" }}>
+                  View
+                </i>
+              </NavLink>
+            </div>
+          </td>
         </tr>
       </Fragment>
     );
