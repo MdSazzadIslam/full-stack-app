@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 
-const Row = () => {
+const Row = ({ products }) => {
+  console.log(products);
   return (
     <Fragment>
       <tr>

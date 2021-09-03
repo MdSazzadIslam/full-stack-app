@@ -1,7 +1,38 @@
-import "./App.css";
+import React, { useState, useEffect } from "react";
 import Row from "./components/Row";
+import Loader from "./components/Loader";
+import ProductService from "./services/productService";
+
+import "./App.css";
 
 const App = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchProducts = async () => {
+    debugger;
+    try {
+      setLoading(true);
+      const res = await ProductService.getProducts();
+      setProducts(res.data);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, [setProducts]);
+
+  if (loading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
   return (
     <div>
       <div className="main-content">
@@ -27,7 +58,7 @@ const App = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      <Row />
+                      <Row products={products} />
                     </tbody>
                   </table>
                 </div>
