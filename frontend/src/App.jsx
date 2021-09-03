@@ -14,7 +14,7 @@ const App = () => {
     try {
       setLoading(true);
       const res = await ProductService.getProducts();
-      setProducts(res.data);
+      setProducts(res.data.products);
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -49,11 +49,14 @@ const App = () => {
                   <table className="table align-items-center table-flush">
                     <thead className="thead-light">
                       <tr>
-                        <th scope="col">Project</th>
-                        <th scope="col">Budget</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Users</th>
-                        <th scope="col">Completion</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Link</th>
+                        <th scope="col">Availability</th>
+                        <th scope="col">Brand</th>
+                        <th scope="col">condition</th>
                         <th scope="col" />
                       </tr>
                     </thead>
