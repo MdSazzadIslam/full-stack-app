@@ -14,13 +14,14 @@ const App = () => {
   const [totalItemsCount, setTotalItemsCount] = useState(0);
   const [searchBy, setSearchBy] = useState("");
 
-  const fetchProducts = async (activePage, itemsCountPerPage) => {
+  const fetchProducts = async () => {
     debugger;
     try {
       setLoading(true);
       const res = await ProductService.getProducts(
         activePage,
-        itemsCountPerPage
+        itemsCountPerPage,
+        searchBy
       );
       setProducts(res.data.products);
       setTotalItemsCount(res.data.count);
@@ -33,7 +34,7 @@ const App = () => {
 
   useEffect(() => {
     console.log(setItemsCountPerPage);
-    fetchProducts(activePage, itemsCountPerPage);
+    fetchProducts();
   }, [setProducts, activePage, itemsCountPerPage]);
 
   const handlePageChange = async (pageNumber) => {
@@ -41,7 +42,10 @@ const App = () => {
     await fetchProducts(pageNumber, itemsCountPerPage);
   };
 
-  const handleProductSearch = (e) => {};
+  const searchProduct = (e) => {
+    e.preventDefault();
+    fetchProducts();
+  };
 
   if (loading) {
     return (
@@ -69,6 +73,7 @@ const App = () => {
                       <div className="col-auto">
                         <i className="fas fa-search h4 text-body" />
                       </div>
+
                       <div className="col">
                         <input
                           className="form-control form-control-lg form-control-borderless"
@@ -77,13 +82,14 @@ const App = () => {
                           name="searchBy"
                           value={searchBy}
                           onChange={(e) => setSearchBy(e.target.value)}
-                          onClick={handleProductSearch}
+                          required={true}
                         />
                       </div>
                       <div className="col-auto">
                         <button
                           className="btn btn-lg btn-success"
                           type="submit"
+                          onClick={searchProduct}
                         >
                           Search
                         </button>

@@ -5,6 +5,7 @@ const Product = require("../models/productModel");
 const getProducts = async (req, res) => {
   const perPage = parseInt(req.query.limit) || 10;
   let page = parseInt(req.query.page) || 1;
+
   let reg = new RegExp(req.query.searchBy, "i");
 
   try {

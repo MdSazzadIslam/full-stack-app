@@ -1,7 +1,13 @@
 import http from "../config";
 class productService {
-  static getProducts = async (page, limit) => {
-    return await http.get(`products/?limit=${limit}` + `&page=${page}`);
+  static getProducts = async (page, limit, searchBy) => {
+    debugger;
+    if (searchBy === null || searchBy === undefined) {
+      searchBy = "";
+    }
+    return await http.get(
+      `products/?limit=${limit}` + `&page=${page}` + `&searchBy=${searchBy}`
+    );
   };
 
   static getProduct = async (id) => {
