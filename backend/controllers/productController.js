@@ -5,9 +5,17 @@ const Product = require("../models/productModel");
 const getProducts = async (req, res) => {
   const perPage = parseInt(req.query.limit) || 10;
   let page = parseInt(req.query.page) || 1;
+  let reg = new RegExp(req.query.searchBy, "i");
 
   try {
     const products = await Product.find({})
+      .or([
+        { title: { $regex: reg } },
+        { availability: { $regex: reg } },
+        { price: { $regex: reg } },
+        { brand: { $regex: reg } },
+        { condition: { $regex: reg } },
+      ])
       .sort("-createdAt")
       .skip(perPage * page - perPage)
       .limit(perPage);
@@ -25,8 +33,8 @@ const getProducts = async (req, res) => {
 
 const getProduct = async (req, res) => {
   try {
-    const product = await Product.findOne({ id: req.params.id });
-    return res.status(200).json(product);
+    const products = await Product.findById({ _id: req.params.id });
+    return res.status(200).json({ products });
   } catch (error) {
     return res.status(500).json({
       status: 500,
@@ -40,7 +48,7 @@ const createProduct = async (req, res) => {
   try {
     const product = new Product(req.body);
     await product.save();
-    return res.status(200).json({
+    return res.status(201).json({
       status: 201,
       success: true,
       message: "Record saved successfully",

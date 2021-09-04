@@ -11,7 +11,8 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [activePage, setActivePage] = useState(1);
   const [itemsCountPerPage, setItemsCountPerPage] = useState(10);
-  const [totalItemsCount, setTotalItemsCount] = useState();
+  const [totalItemsCount, setTotalItemsCount] = useState(0);
+  const [searchBy, setSearchBy] = useState("");
 
   const fetchProducts = async (activePage, itemsCountPerPage) => {
     debugger;
@@ -40,6 +41,8 @@ const App = () => {
     await fetchProducts(pageNumber, itemsCountPerPage);
   };
 
+  const handleProductSearch = (e) => {};
+
   if (loading) {
     return (
       <>
@@ -59,6 +62,36 @@ const App = () => {
                 <div className="card-header border-0">
                   <h3 className="mb-0">Product Information</h3>
                 </div>
+
+                <div className="row justify-content-center">
+                  <div className="col-12 col-md-12 col-lg-8">
+                    <div className="card-body row no-gutters align-items-center">
+                      <div className="col-auto">
+                        <i className="fas fa-search h4 text-body" />
+                      </div>
+                      <div className="col">
+                        <input
+                          className="form-control form-control-lg form-control-borderless"
+                          type="search"
+                          placeholder="Search by title, brand,condition, availability and price"
+                          name="searchBy"
+                          value={searchBy}
+                          onChange={(e) => setSearchBy(e.target.value)}
+                          onClick={handleProductSearch}
+                        />
+                      </div>
+                      <div className="col-auto">
+                        <button
+                          className="btn btn-lg btn-success"
+                          type="submit"
+                        >
+                          Search
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="table-responsive">
                   <table className="table align-items-center table-flush">
                     <thead className="thead-light">
@@ -75,32 +108,33 @@ const App = () => {
                     </thead>
                     <tbody>
                       <Row products={products} />
-                      <div className="container-fluid mb-2 mt-1 ">
-                        <div className="row align-items-center">
-                          <div className="col-md-4 col-sm-12">
-                            {/* <h6>
+                    </tbody>
+                  </table>
+
+                  <div className="container-fluid mb-2 mt-1 ">
+                    <div className="row align-items-center">
+                      <div className="col-md-4 col-sm-12">
+                        {/* <h6>
                     Showing {this.state.currentPage} to{" "}
                     {this.state.totalPages + " "}
                     of {this.state.totalItems} entries
                   </h6> */}
-                          </div>
-                          <div className="col-md-8 col-sm-12">
-                            <div className="float-md-right">
-                              <Pagination
-                                activePage={activePage}
-                                itemsCountPerPage={itemsCountPerPage}
-                                totalItemsCount={totalItemsCount}
-                                pageRangeDisplayed={itemsCountPerPage}
-                                onChange={(e) => handlePageChange(e)}
-                                itemClass="page-item"
-                                linkClass="page-link"
-                              />
-                            </div>
-                          </div>
+                      </div>
+                      <div className="col-md-8 col-sm-12">
+                        <div className="float-md-right">
+                          <Pagination
+                            activePage={activePage}
+                            itemsCountPerPage={itemsCountPerPage}
+                            totalItemsCount={totalItemsCount}
+                            pageRangeDisplayed={itemsCountPerPage}
+                            onChange={(e) => handlePageChange(e)}
+                            itemClass="page-item"
+                            linkClass="page-link"
+                          />
                         </div>
                       </div>
-                    </tbody>
-                  </table>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

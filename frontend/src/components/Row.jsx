@@ -12,8 +12,8 @@ const Row = ({ products }) => {
               <a href="####" className="avatar rounded-circle mr-3">
                 <img alt={product.brand} src={product.image_link} />
               </a>
-              <div class="media-body">
-                <span class="mb-0 text-sm">{product.title}</span>
+              <div className="media-body">
+                <span className="mb-0 text-sm">{product.title}</span>
               </div>
             </div>
           </th>
