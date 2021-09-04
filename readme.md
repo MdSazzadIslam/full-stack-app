@@ -12,9 +12,14 @@ NODE_ENV = development
 PORT = 5000
 MONGO_URI = your mongodb uri
 
-## Install Dependencies (frontend & backend)
+## Install Dependencies
+
+# Backend
 
 npm install
+
+# Frontend
+
 cd frontend
 npm install
 
@@ -27,6 +32,10 @@ npm run dev
 # Run backend only
 
 npm run server
+
+# Run frontend only
+
+npm start
 
 ## Build & Deploy
 
