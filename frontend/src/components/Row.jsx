@@ -11,7 +11,7 @@ const Row = ({ products }) => {
               <Link
                 className="btn btn-sm btn-icon-only text-light"
                 to={{
-                  pathname: "/SingleProduct",
+                  pathname: "SingleProduct",
                   state: {
                     id: product._id,
                     title: product.title,

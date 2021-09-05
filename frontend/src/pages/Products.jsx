@@ -80,6 +80,7 @@ const Products = () => {
                     </div>
                     <div className="col-auto">
                       <button
+                        id="search"
                         className="btn btn-lg btn-success"
                         type="submit"
                         onClick={fetchProducts}
