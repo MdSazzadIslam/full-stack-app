@@ -1,11 +1,6 @@
 version: "3.9"
 
 services:
-  mongo:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
-
   api-server:
     build:
       context: ./
@@ -32,3 +27,8 @@ services:
       - "3000:3000"
     depends_on:
       - api-server
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
