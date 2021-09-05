@@ -50,7 +50,13 @@ const SingleProduct = () => {
                       Title: <span>{title}</span>
                     </h6>
                     <p>{description}</p>
-                    <h6> Link: {link} </h6> <br />
+                    <h6>
+                      Link:
+                      <a href={link} target="_blank">
+                        {link}
+                      </a>
+                    </h6>
+                    <br />
                     brand: {brand} <br />
                     availability: {availability} <br />
                     condition: {condition}
