@@ -1,6 +1,6 @@
 const { chai, server, should } = require("./testConfig");
 /**
- * Test cases to test all the book APIs
+ * Test cases to test all the product APIs
  * Covered Routes:
  * (3) Get all products
  * (4) Get single product
