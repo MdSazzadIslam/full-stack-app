@@ -4,7 +4,7 @@ services:
   mongo:
     image: mongo:latest
     ports:
-      - "27018:27017"
+      - "27017:27017"
 
   api-server:
     build:
@@ -16,7 +16,7 @@ services:
     environment:
       - MONGO_URI=
     ports:
-      - "${SERVER_PORT}:${SERVER_PORT}"
+      - "5000:5000"
     depends_on:
       - mongo
 
@@ -29,22 +29,6 @@ services:
       - ./client:/full-stack-app/client
     stdin_open: true # FIXME: https://github.com/facebook/create-react-app/issues/8688
     ports:
-      - "${PORT}:${PORT}"
+      - "3000:3000"
     depends_on:
       - api-server
-
-  nginx-proxy:
-    restart: always
-    build:
-      context: ./
-      dockerfile: ./nginx-proxy/Dockerfile
-    ports:
-      - "${NGINX_PROXY_PORT}:${NGINX_PROXY_PORT}"
-    environment:
-      - NGINX_LE_PLACEHOLDER_1=${PORT}
-      - NGINX_LE_PLACEHOLDER_2=${SERVER_PORT}
-      - NGINX_LE_PLACEHOLDER_3=${NGINX_PROXY_PORT}
-      - NGINX_LE_TZ
-    depends_on:
-      - api-server
-      - client

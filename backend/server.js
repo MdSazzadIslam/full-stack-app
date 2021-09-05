@@ -4,7 +4,8 @@ const express = require("express");
 const middleware = require("./middlewares");
 const router = require("./routes");
 const connect = require("./config/db");
-
+const dotenv = require("dotenv");
+dotenv.config();
 const app = express();
 
 middleware.loadMiddlewares(app); //loading all the middlewares
