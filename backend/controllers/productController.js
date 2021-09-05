@@ -1,6 +1,7 @@
 "use strict";
 
 const Product = require("../models/productModel");
+const { get, set } = require("../helpers/cacheHandler");
 
 const getProducts = async (req, res) => {
   const perPage = parseInt(req.query.limit) || 10;
@@ -22,6 +23,7 @@ const getProducts = async (req, res) => {
       .limit(perPage);
     const count = await Product.count();
     const pages = Math.ceil(count / perPage);
+
     return res.status(200).json({
       message: "Operation success",
       products,
@@ -40,7 +42,18 @@ const getProducts = async (req, res) => {
 
 const getProduct = async (req, res) => {
   try {
+    const cacheCavalue = await get(req.params.id);
+    if (cacheCavalue) {
+      const cacheData = JSON.parse(cacheCavalue);
+
+      return res
+        .status(200)
+        .json({ message: "Operation success", products: cacheData });
+    }
+
     const products = await Product.findById({ _id: req.params.id });
+    await set(req.params.id, JSON.stringify(products));
+
     return res.status(200).json({ message: "Operation success", products });
   } catch (error) {
     return res.status(500).json({
