@@ -5,7 +5,6 @@ const SingleProduct = () => {
   const history = useHistory();
 
   const {
-    id,
     title,
     description,
     imageLink,
@@ -13,14 +12,7 @@ const SingleProduct = () => {
     condition,
     availability,
     price,
-    gtin,
-    mpn,
-    shipping,
-    identifierExists,
-    googleProductCategory,
-    adult,
-    gender,
-    color,
+
     link,
   } = history.location.state;
 
@@ -41,6 +33,7 @@ const SingleProduct = () => {
                   <div className="col-md-6 product_img">
                     <img
                       src={imageLink}
+                      alt={brand}
                       className="img-responsive"
                       width="300px"
                       height="300px"
@@ -48,12 +41,14 @@ const SingleProduct = () => {
                   </div>
                   <div className="col-md-6 product_content">
                     <h6>
-                      Title: <span>{title}</span>
+                      <strong> Title:</strong> <span>{title}</span>
                     </h6>
-                    <p>{description}</p>
+                    <p>
+                      <strong> description:</strong> {description}
+                    </p>
                     <h6>
                       Link:
-                      <a href={link} target="_blank">
+                      <a href={link} target="_blank" rel="noreferrer">
                         {link}
                       </a>
                     </h6>

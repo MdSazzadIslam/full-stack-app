@@ -46,9 +46,9 @@ const Row = ({ products }) => {
 
           <th scope="row">
             <div className="media align-items-center">
-              <a className="avatar rounded-circle mr-3">
+              <div className="avatar rounded-circle mr-3">
                 <img alt={product.brand} src={product.image_link} />
-              </a>
+              </div>
               <div className="media-body">
                 <span className="mb-0 text-sm">{product.title}</span>
               </div>

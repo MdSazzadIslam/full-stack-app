@@ -1,12 +1,11 @@
 import http from "../config";
 class productService {
   static getProducts = async (page, limit, searchBy) => {
-    debugger;
-    if (searchBy === null || searchBy === undefined) {
-      searchBy = "";
-    }
     return await http.get(
-      `products/?limit=${limit}` + `&page=${page}` + `&searchBy=${searchBy}`
+      `products/?limit=${limit}` +
+        "&page=" +
+        `${page}` +
+        `&searchBy=${searchBy}`
     );
   };
 
@@ -15,14 +14,12 @@ class productService {
   };
 
   static createProduct = async (title, data) => {
-    debugger;
     return await http.post("products", {
       data,
     });
   };
 
   static updateProduct = async (id, data) => {
-    debugger;
     return await http.put(`products/${id}`, {
       data,
     });

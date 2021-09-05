@@ -15,7 +15,6 @@ const Products = () => {
   const [searchBy, setSearchBy] = useState("");
 
   const fetchProducts = async () => {
-    debugger;
     try {
       setLoading(true);
       const res = await ProductService.getProducts(
@@ -33,8 +32,10 @@ const Products = () => {
   };
 
   useEffect(() => {
+    console.log(setItemsCountPerPage);
     fetchProducts();
-  }, [setProducts, setActivePage, setItemsCountPerPage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handlePageChange = async (pageNumber) => {
     setActivePage(pageNumber);
