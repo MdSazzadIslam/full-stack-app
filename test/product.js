@@ -23,7 +23,6 @@ describe("Product API", () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.have.property("message").eql("Operation success");
-          //testData._id = res.body.data[0]._id;
           done();
         });
     });
