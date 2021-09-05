@@ -56,6 +56,10 @@ npm run data:import
 
 npm run data:destroy
 
+# Test (Backend)
+
+npm run test
+
 # Project Architecture
 
 Client(Web Browser) -> Web Server (Front End App) -> Back-End Server (Back End API) -> MongoDB
