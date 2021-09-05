@@ -109,6 +109,17 @@ const Products = () => {
                   <tbody>
                     <Row products={products} />
                   </tbody>
+                  <thead className="thead-light">
+                    <tr>
+                      <th scope="col">Action </th>
+                      <th scope="col">Product and Title</th>
+
+                      <th scope="col">Brand</th>
+                      <th scope="col">condition</th>
+                      <th scope="col">Availability</th>
+                      <th scope="col">Price</th>
+                    </tr>
+                  </thead>
                 </table>
 
                 <div className="container-fluid mb-2 mt-1 ">
