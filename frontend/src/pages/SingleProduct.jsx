@@ -32,7 +32,7 @@ const SingleProduct = () => {
           <div className="col">
             <div className="card shadow">
               <div className="card-header border-0">
-                <h3 className="mb-0">Product Information</h3>
+                <h3 className="mb-0">Product Detail Information</h3>
               </div>
 
               <div className="modal-body">

@@ -75,7 +75,7 @@ const Products = () => {
                         name="searchBy"
                         value={searchBy}
                         onChange={(e) => setSearchBy(e.target.value)}
-                        required={true}
+                        required
                       />
                     </div>
                     <div className="col-auto">
