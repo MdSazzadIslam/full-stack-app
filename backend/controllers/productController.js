@@ -22,7 +22,13 @@ const getProducts = async (req, res) => {
       .limit(perPage);
     const count = await Product.count();
     const pages = Math.ceil(count / perPage);
-    return res.status(200).json({ products, count, currentPage: page, pages });
+    return res.status(200).json({
+      message: "Operation success",
+      products,
+      count,
+      currentPage: page,
+      pages,
+    });
   } catch (error) {
     return res.status(500).json({
       status: 500,
@@ -35,7 +41,7 @@ const getProducts = async (req, res) => {
 const getProduct = async (req, res) => {
   try {
     const products = await Product.findById({ _id: req.params.id });
-    return res.status(200).json({ products });
+    return res.status(200).json({ message: "Operation success", products });
   } catch (error) {
     return res.status(500).json({
       status: 500,
