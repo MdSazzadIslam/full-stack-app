@@ -65,16 +65,24 @@ npm run test
 ## backend
 
 > get the list of products from a CSV file
+
 > store the data in DB
+
 > dockerize the application
+
 > testing
+
 
 ## frontend
 
 > Connect to your back-end application and get the list of products
+
 > Render the list of products in a table with pagination \& filtering
+
 > clicking to see the details of specific row, the application will navigate
+
 > to details of that product and be able to share that product's link
+
 > testing
 
 # Project Architecture
