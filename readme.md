@@ -2,7 +2,7 @@
 
 > Application built with the MERN stack.
 
-# I am planning to download csv file and extract the data from that file after that save the data into MongoDB. Now I am going to retrive data from database and implement sorting and Filtering.
+I am planning to download csv file and extract the data from that file after that save the data into MongoDB. Now I am going to retrive data from database and implement sorting and Filtering.
 
 ### Env Variables
 
